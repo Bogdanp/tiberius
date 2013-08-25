@@ -1,6 +1,7 @@
 package tiberius
 
 sealed trait Expression
+case class BooleanExp(b: Boolean) extends Expression
 case class NumberExp(n: Double) extends Expression
 case class StringExp(s: String) extends Expression
 case class SymbolExp(s: String) extends Expression
