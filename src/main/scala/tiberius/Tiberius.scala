@@ -5,8 +5,7 @@ object Tiberius {
   type Result = Either[String, (Expression, Env, Stack)]
 
   val unit = UnitExp()
-
-  def initialStack: Stack = List()
+  val initialStack = List()
 
   def eval(input: String): Result =
     eval("<stdin>", input)
