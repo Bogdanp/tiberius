@@ -14,3 +14,8 @@ case class Env(
   def set(e: Expression, v: Expression): Env =
     copy(table=table + (e -> v))
 }
+
+object Env {
+  def apply(): Env = Env(None, Map())
+  def apply(p: Env): Env = Env(Some(p), Map())
+}
