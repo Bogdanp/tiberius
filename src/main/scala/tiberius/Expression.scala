@@ -3,6 +3,7 @@ package tiberius
 import Tiberius._
 
 sealed trait Expression
+case class UnitExp() extends Expression
 case class BooleanExp(b: Boolean) extends Expression
 case class NumberExp(n: Double) extends Expression
 case class StringExp(s: String) extends Expression
