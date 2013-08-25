@@ -9,7 +9,9 @@ object Parser extends RegexParsers {
     boolean  |
     number   |
     string   |
-    block    |
+    stack    |
+    pop      |
+    push     |
     function |
     symbol
 
@@ -50,14 +52,24 @@ object Parser extends RegexParsers {
   def symbol: Parser[SymbolExp] =
     """[^ \t\r\n\{\}]+""".r ^^ SymbolExp
 
-  def block: Parser[StackExp] =
+  def stack: Parser[StackExp] =
     "{" ~> rep(expression) <~ "}" ^^ {
       case xs => StackExp(xs)
     }
 
+  def pop: Parser[PopExp] =
+    "->" ~> symbol ^^ {
+      case sym => PopExp(sym)
+    }
+
+  def push: Parser[PushExp] =
+    "<-" ~> symbol ^^ {
+      case sym => PushExp(sym)
+    }
+
   def function: Parser[FunctionExp] =
-    "fn" ~> symbol ~ block ^^ {
-      case symbol ~ block => FunctionExp(symbol, block)
+    "fn" ~> symbol ~ stack ^^ {
+      case symbol ~ stack => FunctionExp(symbol, stack)
     }
 
   def apply(filename: String, input: String): Either[String, (String, Seq[Expression])] =

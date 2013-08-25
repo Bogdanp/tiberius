@@ -13,6 +13,9 @@ object Tiberius {
   def eval(source: String, input: String): Result =
     eval(source, input, Env(), initialStack)
 
+  def eval(source: String, input: String, env: Env): Result =
+    eval(source, input, env, initialStack)
+
   def eval(source: String, input: String, env: Env, stack: Stack): Result =
     Parser(source, input).right.flatMap {
       case (_, xs) => {
@@ -29,7 +32,6 @@ object Tiberius {
     case sym@SymbolExp(s: String) => env.lookup(sym) match {
       case None    => Left(s"Failed to lookup '${s}'.")
       case Some(e) => e match {
-        case NativeExp(_, fn) => fn(env, stack)
         case FunctionExp(_, StackExp(xs)) => {
           val current: Result = Right((exp, env, stack))
 
@@ -38,9 +40,12 @@ object Tiberius {
             case (err, _) => err
           }
         }
-        case e => eval(e, env, stack)
+        case NativeExp(fn) => fn(env, stack)
+        case e             => eval(e, env, stack)
       }
     }
+    case PushExp(sym)        => eval(sym, env, stack)
+    case PopExp(sym)         => Right((unit, env.set(sym, stack(0)), stack.tail))
     case FunctionExp(sym, _) => Right((unit, env.set(sym, exp), stack))
     case e                   => Right((e, env, e :: stack))
   }
