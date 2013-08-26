@@ -6,13 +6,6 @@ object IO {
   import Expression._
   import Tiberius._
 
-  val show = native { (env: Env, stack: Stack) =>
-    print(stack(0).show)
-    succ(unit, env, stack.tail)
-  }
-
-  val showLn = native { (env: Env, stack: Stack) =>
-    println(stack(0).show)
-    succ(unit, env, stack.tail)
-  }
+  val show   = unaryOp { e: Expression => print(e.show); e}
+  val showLn = unaryOp { e: Expression => println(e.show); e}
 }

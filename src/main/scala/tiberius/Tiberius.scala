@@ -1,6 +1,10 @@
 package tiberius
 
+import scala.reflect.ClassTag
+
 object Tiberius {
+  import Expression._
+
   type Stack = List[Expression]
   type Result = Either[String, (Expression, Env, Stack)]
 
@@ -54,4 +58,34 @@ object Tiberius {
 
   def fail(err: String): Result = Left(err)
   def succ(exp: Expression, env: Env, stack: Stack): Result = Right((exp, env, stack))
+
+  def unaryOp[A <: Expression : ClassTag,
+              B <: Expression : ClassTag](fn: A => B) =
+    native { (env: Env, stack: Stack) =>
+      stack match {
+        case (op: A) :: xs => {
+          val res = fn(op)
+
+          succ(res, env, res :: xs)
+        }
+        case a :: xs => fail(s"Invalid parameter '${a.show}'.")
+        case as      => fail(s"""Bad arity (${as.map(_.show).mkString(" ")}).""")
+      }
+    }
+
+  def binaryOp[A <: Expression : ClassTag,
+               B <: Expression : ClassTag,
+               C <: Expression : ClassTag](fn: (A, B) => C) =
+    native { (env: Env, stack: Stack) =>
+      stack match {
+        case (op1: A) :: (op2: B) :: xs => {
+          val res = fn(op1, op2)
+
+          succ(res, env, res :: xs)
+        }
+        case (op1: A) :: op2 :: xs => fail(s"Invalid parameter '${op2.show}'.")
+        case op1 :: op2 :: xs      => fail(s"Invalid parameter '${op1.show}'.")
+        case as                    => fail(s"""Bad arity (${as.map(_.show).mkString(" ")}).""")
+      }
+    }
 }
