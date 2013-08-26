@@ -78,4 +78,8 @@ object Stack {
   val stackToString = unaryOp { stack: StackExp =>
     StringExp(stack.xs.map(_.show).mkString)
   }
+
+  val stackLookup = binaryOp { (n: NumberExp, stack: StackExp) =>
+    stack.xs(n.n.toInt - 1)
+  }
 }

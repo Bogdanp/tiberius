@@ -34,6 +34,10 @@ object Prelude {
       .set(sym("foldr"), foldr)
       .set(sym("map"), map)
       .set(sym("stack/str"), stackToString)
+      .set(sym("st"), stackLookup)
+      .set(sym("nd"), stackLookup)
+      .set(sym("rd"), stackLookup)
+      .set(sym("th"), stackLookup)
       // String
       .set(sym("cat"), cat)
       .set(sym("lowercase"), toLower)
