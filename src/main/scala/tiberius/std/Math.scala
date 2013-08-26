@@ -12,9 +12,9 @@ object Math {
         case NumberExp(a) :: NumberExp(b) :: rest => {
           val res = NumberExp(fn(a, b))
 
-          Right((res, env, res :: rest))
+          succ(res, env, res :: rest)
         }
-        case as => Left(s"Invalid arguments to + (${as}).")
+        case as => fail(s"Invalid arguments to + (${as}).")
       }
     }
 

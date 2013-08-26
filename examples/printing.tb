@@ -1,4 +1,4 @@
-#T putStrLn
-123 putStrLn
-"asdf" putStrLn
-{ 1 2 3 } putStrLn
+#T showLn
+123 showLn
+"asdf" showLn
+{ 1 2 3 } showLn

@@ -4,8 +4,6 @@ fn sumMul {
   -> c
 
   b a + c *
-
-  putStrLn
 }
 
-3 2 1 sumMul
+3 2 1 sumMul showLn

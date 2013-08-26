@@ -11,8 +11,8 @@ object Prelude {
 
   val env =
     Env()
-      .set(sym("putStr"), putStr)
-      .set(sym("putStrLn"), putStrLn)
+      .set(sym("show"), show)
+      .set(sym("showLn"), showLn)
       .set(sym("+"), sum)
       .set(sym("-"), dif)
       .set(sym("*"), mul)
