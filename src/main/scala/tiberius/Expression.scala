@@ -3,6 +3,12 @@ package tiberius
 import Tiberius._
 
 sealed trait Expression {
+  override def toString: String =
+    this match {
+      case StringExp(s) => s""""${s}""""
+      case e            => e.show
+    }
+
   def show: String =
     this match {
       case UnitExp()         => "()"
@@ -10,7 +16,7 @@ sealed trait Expression {
       case BooleanExp(false) => "#f"
       case NumberExp(n)      => n.toString
       case StringExp(s)      => s
-      case StackExp(xs)      => s"""{ ${xs.map(_.show).mkString(" ")} }"""
+      case StackExp(xs)      => s"""{ ${xs.map(_.toString).mkString(" ")} }"""
       case FunctionExp(s, _) => s"""fn ${s.show} {...}"""
       case LambdaExp(_)      => "#{...}"
       case _                 => "{...}"

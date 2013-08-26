@@ -74,4 +74,8 @@ object Stack {
       case                        stack => fail(s"Bad arity (${listStack(stack)}).")
     }
   }
+
+  val stackToString = unaryOp { stack: StackExp =>
+    StringExp(stack.xs.map(_.show).mkString)
+  }
 }

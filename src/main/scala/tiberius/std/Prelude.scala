@@ -12,9 +12,7 @@ object Prelude {
   import Stack._
   import String._
 
-  val cls = native { (env: Env, _ : Stack) =>
-    succ(unit, env, initialStack)
-  }
+  val cls = native { (env: Env, _) => succ(unit, env, initialStack) }
 
   val env =
     Env()
@@ -24,6 +22,8 @@ object Prelude {
       // IO
       .set(sym("show"), show)
       .set(sym("showLn"), showLn)
+      .set(sym("read"), read)
+      .set(sym("exists"), exists)
       // Math
       .set(sym("+"), sum)
       .set(sym("-"), dif)
@@ -33,6 +33,10 @@ object Prelude {
       .set(sym("foldl"), foldl)
       .set(sym("foldr"), foldr)
       .set(sym("map"), map)
+      .set(sym("stack/str"), stackToString)
       // String
       .set(sym("cat"), cat)
+      .set(sym("lowercase"), toLower)
+      .set(sym("uppercase"), toUpper)
+      .set(sym("str/stack"), stringToStack)
 }
