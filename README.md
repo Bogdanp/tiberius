@@ -9,13 +9,13 @@ tiberius is a _tiny_ stack-based functional programming language.
            8 unique files.
            0 files ignored.
     
-    http://cloc.sourceforge.net v 1.58  T=0.5 s (16.0 files/s, 590.0 lines/s)
+    http://cloc.sourceforge.net v 1.58  T=0.5 s (16.0 files/s, 630.0 lines/s)
     -------------------------------------------------------------------------------
     Language                     files          blank        comment           code
     -------------------------------------------------------------------------------
-    Scala                            8             52              0            243
+    Scala                            8             56              0            259
     -------------------------------------------------------------------------------
-    SUM:                             8             52              0            243
+    SUM:                             8             56              0            259
     -------------------------------------------------------------------------------
 
 ### OHGODWHY?
