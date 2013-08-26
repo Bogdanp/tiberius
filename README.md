@@ -2,6 +2,22 @@
 
 tiberius is a _tiny_ stack-based functional programming language.
 
+### Tiny
+
+    tiberius(master)$ cloc src/main/scala/**/*
+          18 text files.
+           8 unique files.
+           0 files ignored.
+    
+    http://cloc.sourceforge.net v 1.58  T=0.5 s (16.0 files/s, 590.0 lines/s)
+    -------------------------------------------------------------------------------
+    Language                     files          blank        comment           code
+    -------------------------------------------------------------------------------
+    Scala                            8             52              0            243
+    -------------------------------------------------------------------------------
+    SUM:                             8             52              0            243
+    -------------------------------------------------------------------------------
+
 ### OHGODWHY?
 
 B/c boredom and because I wanted to see exactly how much I could get
