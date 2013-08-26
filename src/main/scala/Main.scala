@@ -6,11 +6,13 @@ import tiberius._
 import tiberius.std.Prelude
 
 object Main {
+  val header = """|Tiberius 0.1.0
+                  |Type :q or use Ctrl-d to quit.""".stripMargin
   val prompt = "> "
 
   def main(args: Array[String]): Unit = {
     args.toList match {
-      case filename :: ps =>
+      case filename :: ps => {
         val source = Source.fromFile(filename).mkString
         val initialEnv = Prelude.env.set(SymbolExp("@#"), NumberExp(ps.length))
         val (env, _) = ((initialEnv, 0) /: ps) {
@@ -23,10 +25,13 @@ object Main {
           case Left(err) => println(s"error: ${err}")
           case _         =>
         }
-      case Nil =>
+      }
+      case Nil => {
         Terminal.getTerminal.initializeTerminal
 
         val reader = new ConsoleReader()
+
+        println(header)
 
         Iterator
           .continually(reader.readLine(prompt))
@@ -45,6 +50,7 @@ object Main {
               }
             }
           }
+      }
     }
   }
 }
