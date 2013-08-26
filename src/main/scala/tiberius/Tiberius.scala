@@ -63,13 +63,13 @@ object Tiberius {
               B <: Expression : ClassTag](fn: A => B) =
     native { (env: Env, stack: Stack) =>
       stack match {
-        case (op: A) :: xs => {
-          val res = fn(op)
+        case (a: A) :: xs => {
+          val res = fn(a)
 
           succ(res, env, res :: xs)
         }
         case a :: xs => fail(s"Invalid parameter '${a.show}'.")
-        case as      => fail(s"""Bad arity (${as.map(_.show).mkString(" ")}).""")
+        case xs      => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
       }
     }
 
@@ -78,14 +78,14 @@ object Tiberius {
                C <: Expression : ClassTag](fn: (A, B) => C) =
     native { (env: Env, stack: Stack) =>
       stack match {
-        case (op1: A) :: (op2: B) :: xs => {
-          val res = fn(op1, op2)
+        case (a: A) :: (b: B) :: xs => {
+          val res = fn(a, b)
 
           succ(res, env, res :: xs)
         }
-        case (op1: A) :: op2 :: xs => fail(s"Invalid parameter '${op2.show}'.")
-        case op1 :: op2 :: xs      => fail(s"Invalid parameter '${op1.show}'.")
-        case as                    => fail(s"""Bad arity (${as.map(_.show).mkString(" ")}).""")
+        case (a: A) :: b :: xs => fail(s"Invalid parameter '${b.show}'.")
+        case a :: b :: xs      => fail(s"Invalid parameter '${a.show}'.")
+        case xs                => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
       }
     }
 }
