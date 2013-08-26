@@ -1,0 +1,10 @@
+package tiberius.std
+
+import tiberius._
+
+object String {
+  import Expression._
+  import Tiberius._
+
+  val cat = binaryOp { (a: StringExp, b: StringExp) => StringExp(b.s + a.s) }
+}

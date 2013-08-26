@@ -10,6 +10,7 @@ object Prelude {
   import IO._
   import Math._
   import Stack._
+  import String._
 
   val cls = native { (env: Env, _ : Stack) =>
     succ(unit, env, initialStack)
@@ -17,15 +18,21 @@ object Prelude {
 
   val env =
     Env()
+      .set(sym("•"), cls)
+      // Fn
+      .set(sym("@"), app)
+      // IO
       .set(sym("show"), show)
       .set(sym("showLn"), showLn)
+      // Math
       .set(sym("+"), sum)
       .set(sym("-"), dif)
       .set(sym("*"), mul)
       .set(sym("/"), div)
-      .set(sym("@"), app)
-      .set(sym("•"), cls)
+      // Stack
       .set(sym("foldl"), foldl)
       .set(sym("foldr"), foldr)
       .set(sym("map"), map)
+      // String
+      .set(sym("cat"), cat)
 }
