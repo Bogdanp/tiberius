@@ -4,7 +4,8 @@ tiberius is a _tiny_ stack-based functional programming language.
 
 ### OHGODWHY?
 
-B/c boredom.
+B/c boredom and because I wanted to see exactly how much I could get
+done in a few hours, turns out it's quite a lot.
 
 ### Show me!
 
