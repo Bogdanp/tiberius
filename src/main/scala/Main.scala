@@ -28,7 +28,7 @@ object Main {
             case ((env, stack), line) => {
               Tiberius.eval("<stdin>", line, env, stack) match {
                 case Right((e, env, stack)) => {
-                  println(e.show)
+                  stack.map(e => println(e.show))
                   (env, stack)
                 }
                 case Left(err) => {
