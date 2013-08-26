@@ -9,6 +9,7 @@ object Prelude {
   import Fn._
   import IO._
   import Math._
+  import Stack._
 
   val cls = native { (env: Env, _ : Stack) =>
     succ(unit, env, initialStack)
@@ -24,4 +25,5 @@ object Prelude {
       .set(sym("/"), div)
       .set(sym("@"), app)
       .set(sym("•"), cls)
+      .set(sym("map"), map)
 }

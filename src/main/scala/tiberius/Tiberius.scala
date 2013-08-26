@@ -75,7 +75,7 @@ object Tiberius {
           succ(res, env, res :: xs)
         }
         case a :: xs => fail(s"Invalid parameter '${a.show}'.")
-        case xs      => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
+        case      xs => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
       }
     }
 
@@ -90,8 +90,8 @@ object Tiberius {
           succ(res, env, res :: xs)
         }
         case (a: A) :: b :: xs => fail(s"Invalid parameter '${b.show}'.")
-        case a :: b :: xs      => fail(s"Invalid parameter '${a.show}'.")
-        case xs                => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
+        case  a     :: b :: xs => fail(s"Invalid parameter '${a.show}'.")
+        case                xs => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
       }
     }
 }
