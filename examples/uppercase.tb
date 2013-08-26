@@ -1,0 +1,7 @@
+fn upcase {
+  str/stack
+  #{uppercase} map
+  stack/str
+}
+
+@0 read upcase showLn

@@ -3,8 +3,6 @@ package tiberius
 import scala.util.parsing.combinator._
 
 object Parser extends RegexParsers {
-  override val whiteSpace = """(--.*|[ \t\r\n]+)""".r
-
   def expression: Parser[Expression] =
     boolean  |
     number   |

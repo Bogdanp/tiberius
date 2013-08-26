@@ -9,14 +9,21 @@ object Main {
   val prompt = "> "
 
   def main(args: Array[String]): Unit = {
-    args match {
-      case Array(filename) =>
+    args.toList match {
+      case filename :: ps =>
         val source = Source.fromFile(filename).mkString
-        val result = Tiberius.eval(filename, source, Prelude.env) match {
-          case Left(err) => println(s"error: ${err}")
-          case success   => success
+        val initialEnv = Prelude.env.set(SymbolExp("@#"), NumberExp(ps.length))
+        val (env, _) = ((initialEnv, 0) /: ps) {
+          case ((env, n), p) => {
+            (env.set(SymbolExp(s"@${n}"), StringExp(p)), n + 1)
+          }
         }
-      case Array() =>
+
+        Tiberius.eval(filename, source, env) match {
+          case Left(err) => println(s"error: ${err}")
+          case _         =>
+        }
+      case Nil =>
         Terminal.getTerminal.initializeTerminal
 
         val reader = new ConsoleReader()
@@ -38,8 +45,6 @@ object Main {
               }
             }
           }
-      case _ =>
-        println("""Usage: sbt "run [filename]"""")
     }
   }
 }
