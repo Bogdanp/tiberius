@@ -50,8 +50,14 @@ object Tiberius {
             case e             => eval(e, env, stack)
           }
         }
+      case PopExp(sym) => {
+        stack match {
+          case LambdaExp(body) :: xs => eval(FunctionExp(sym, body), env, xs)
+          case e               :: xs => eval(unit, env.set(sym, e), xs)
+          case _                     => fail("Empty stack.")
+        }
+      }
       case PushExp(sym)        => eval(sym, env, stack)
-      case PopExp(sym)         => succ(unit, env.set(sym, stack(0)), stack.tail)
       case FunctionExp(sym, _) => succ(unit, env.set(sym, exp), stack)
       case e                   => succ(e, env, e :: stack)
     }
