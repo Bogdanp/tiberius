@@ -6,4 +6,18 @@ fn sumMul {
   b a + c *
 }
 
-3 2 1 sumMul showLn
+fn sumMul2 {+ *}
+
+fn spc { " " show }
+
+3 2 1 sumMul
+3 2 1 sumMul2
+
+-> b
+-> a
+
+"Results: " showLn
+
+a show spc b show
+
+"" showLn
