@@ -2,7 +2,20 @@ package tiberius
 
 import Tiberius._
 
-sealed trait Expression
+sealed trait Expression {
+  def show: String =
+    this match {
+      case UnitExp()         => "()"
+      case BooleanExp(true)  => "#T"
+      case BooleanExp(false) => "#F"
+      case NumberExp(n)      => n.toString
+      case StringExp(s)      => s
+      case StackExp(xs)      => s"""{ ${xs.map(_.show).mkString(" ")} }"""
+      case FunctionExp(s, _) => s"""fn ${s.show} {...}"""
+      case _                 => "{...}"
+    }
+}
+
 case class UnitExp() extends Expression
 case class BooleanExp(b: Boolean) extends Expression
 case class NumberExp(n: Double) extends Expression
