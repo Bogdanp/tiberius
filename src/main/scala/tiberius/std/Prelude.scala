@@ -29,6 +29,7 @@ object Prelude {
       .set(sym("-"), dif)
       .set(sym("*"), mul)
       .set(sym("/"), div)
+      .set(sym("num/str"), numberToString)
       // Stack
       .set(sym("foldl"), foldl)
       .set(sym("foldr"), foldr)
