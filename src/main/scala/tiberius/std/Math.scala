@@ -9,8 +9,11 @@ object Math {
   def binaryOp(fn: (Double, Double) => Double) =
     native { (env: Env, stack: Stack) =>
       stack match {
-        case NumberExp(a) :: NumberExp(b) :: rest =>
-          Right((unit, env, NumberExp(fn(a, b)) :: rest))
+        case NumberExp(a) :: NumberExp(b) :: rest => {
+          val res = NumberExp(fn(a, b))
+
+          Right((res, env, res :: rest))
+        }
         case as => Left(s"Invalid arguments to + (${as}).")
       }
     }
