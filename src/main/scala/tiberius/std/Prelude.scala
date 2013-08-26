@@ -10,6 +10,10 @@ object Prelude {
   import IO._
   import Math._
 
+  val cls = native { (env: Env, _ : Stack) =>
+    succ(unit, env, initialStack)
+  }
+
   val env =
     Env()
       .set(sym("show"), show)
@@ -19,4 +23,5 @@ object Prelude {
       .set(sym("*"), mul)
       .set(sym("/"), div)
       .set(sym("@"), app)
+      .set(sym("•"), cls)
 }
