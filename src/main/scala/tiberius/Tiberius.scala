@@ -78,7 +78,7 @@ object Tiberius {
           succ(res, env, res :: xs)
         }
         case a :: xs => fail(s"Invalid parameter '${a.show}'.")
-        case      xs => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
+        case      xs => fail(s"Bad arity (${listStack(xs)}).")
       }
     }
 
@@ -94,7 +94,10 @@ object Tiberius {
         }
         case (a: A) :: b :: xs => fail(s"Invalid parameter '${b.show}'.")
         case  a     :: b :: xs => fail(s"Invalid parameter '${a.show}'.")
-        case                xs => fail(s"""Bad arity (${xs.map(_.show).mkString(" ")}).""")
+        case                xs => fail(s"Bad arity (${listStack(xs)}).")
       }
     }
+
+  def listStack(xs: List[Expression]): String =
+    xs.map(_.show).mkString(" ")
 }

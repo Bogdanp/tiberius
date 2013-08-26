@@ -25,5 +25,7 @@ object Prelude {
       .set(sym("/"), div)
       .set(sym("@"), app)
       .set(sym("•"), cls)
+      .set(sym("foldl"), foldl)
+      .set(sym("foldr"), foldr)
       .set(sym("map"), map)
 }
