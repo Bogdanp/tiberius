@@ -39,11 +39,14 @@ object Tiberius {
           case None    => fail(s"Failed to look up '${name}'.")
           case Some(e) => e match {
             case FunctionExp(_, StackExp(xs)) => {
-              val current: Result = succ(exp, env, stack)
+              val parent = env
+              val current: Result = succ(exp, Env(parent), stack)
 
               (current /: xs) {
                 case (Right((_, env, stack)), exp) => eval(exp, env, stack)
                 case (err, _) => err
+              }.right.flatMap {
+                case (exp, _, stack) => succ(exp, parent, stack)
               }
             }
             case NativeExp(fn) => fn(env, stack)
