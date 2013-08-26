@@ -1,1 +1,9 @@
-1 2 3 + * putStrLn
+fn sumMul {
+  -> a
+  -> b
+  -> c
+  b a +
+  c *
+  putStrLn
+}
+3 2 1 sumMul
