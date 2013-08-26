@@ -25,7 +25,7 @@ done in a few hours, turns out it's quite a lot.
 
 ### Show me!
 
-    > "Hello, World!" putStrLn
+    > "Hello, World!" showLn
     Hello, World!
     > 3 2 + 5 *
     25.0
@@ -39,6 +39,6 @@ done in a few hours, turns out it's quite a lot.
     > +
     5.0
     25.0
-    > fn +2 { -> x x 2 + }
+    > fn +2 { 2 + }
     > 25 +2
     27.0
