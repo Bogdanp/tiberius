@@ -13,12 +13,13 @@ object Parser extends RegexParsers {
     pop      |
     push     |
     function |
+    lambda        |
     symbol
 
   def boolean: Parser[BooleanExp] =
-    "#" ~> "(T|F)".r ^^ {
-      case "T" => BooleanExp(true)
-      case "F" => BooleanExp(false)
+    "#" ~> "(t|f)".r ^^ {
+      case "t" => BooleanExp(true)
+      case "f" => BooleanExp(false)
     }
 
   def number: Parser[NumberExp] = {
@@ -65,6 +66,11 @@ object Parser extends RegexParsers {
   def push: Parser[PushExp] =
     "<-" ~> symbol ^^ {
       case sym => PushExp(sym)
+    }
+
+  def lambda: Parser[LambdaExp] =
+    "#{" ~> rep(expression) <~ "}" ^^ {
+      case xs => LambdaExp(StackExp(xs))
     }
 
   def function: Parser[FunctionExp] =

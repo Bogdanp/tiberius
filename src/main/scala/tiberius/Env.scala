@@ -13,6 +13,9 @@ case class Env(
 
   def set(e: Expression, v: Expression): Env =
     copy(table=table + (e -> v))
+
+  def drop(e: Expression): Env =
+    copy(table=table - e)
 }
 
 object Env {

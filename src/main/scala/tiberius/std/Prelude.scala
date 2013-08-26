@@ -6,6 +6,7 @@ object Prelude {
   import Expression._
   import Tiberius._
 
+  import Fn._
   import IO._
   import Math._
 
@@ -17,4 +18,5 @@ object Prelude {
       .set(sym("-"), dif)
       .set(sym("*"), mul)
       .set(sym("/"), div)
+      .set(sym("@"), app)
 }
