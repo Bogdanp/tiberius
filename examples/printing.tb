@@ -1,4 +1,4 @@
-#T showLn
+#t showLn
 123 showLn
 "asdf" showLn
 { 1 2 3 } showLn
