@@ -11,7 +11,7 @@ object Parser extends RegexParsers {
     pop      |
     push     |
     function |
-    lambda        |
+    lambda   |
     symbol
 
   def boolean: Parser[BooleanExp] =
