@@ -25,12 +25,12 @@ object Parser extends RegexParsers {
       "0" ^^ { _ => NumberExp(0) }
 
     val whole: Parser[NumberExp] =
-      """[1-9][0-9]*""".r ^^ { number =>
+      """-?[1-9][0-9]*""".r ^^ { number =>
         NumberExp(number.toDouble)
       }
 
     val real: Parser[NumberExp] =
-      """([1-9][0-9]*)?\.\d+""".r ^^ { number =>
+      """-?([1-9][0-9]*)?\.\d+""".r ^^ { number =>
         NumberExp(number.toDouble)
       }
 
