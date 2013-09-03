@@ -6,6 +6,7 @@ object Prelude {
   import Expression._
   import Tiberius._
 
+  import Control._
   import Fn._
   import IO._
   import Math._
@@ -17,6 +18,8 @@ object Prelude {
   val env =
     Env()
       .set(sym("•"), cls)
+      // Control
+      .set(sym("?"), if_)
       // Fn
       .set(sym("@"), app)
       // IO

@@ -98,6 +98,24 @@ object Tiberius {
       }
     }
 
+  def tertiaryOp[A <: Expression : ClassTag,
+                 B <: Expression : ClassTag,
+                 C <: Expression : ClassTag,
+                 D <: Expression : ClassTag](fn: (A, B, C) => D) =
+    native { (env: Env, stack: Stack) =>
+      stack match {
+        case (a: A) :: (b: B) :: (c: C) :: xs => {
+          val res = fn(a, b, c)
+
+          succ(res, env, res :: xs)
+        }
+        case (a: A) :: (b: B) :: c :: xs => fail(s"Invalid parameter '${c.show}'.")
+        case (a: A) :: b      :: c :: xs => fail(s"Invalid parameter '${b.show}'.")
+        case  a     :: b      :: c :: xs => fail(s"Invalid parameter '${a.show}'.")
+        case                          xs => fail(s"Bad arity (${listStack(xs)}).")
+      }
+    }
+
   def listStack(xs: List[Expression]): String =
     xs.map(_.show).mkString(" ")
 }
