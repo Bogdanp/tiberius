@@ -18,6 +18,7 @@ object Prelude {
   val env =
     Env()
       .set(sym("•"), cls)
+      .set(sym("()"), unit)
       // Control
       .set(sym("?"), if_)
       // Fn

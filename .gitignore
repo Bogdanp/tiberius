@@ -2,6 +2,7 @@
 *.sw*
 .\#*
 \#*
+*~undo-tree~
 
 # Project
 .ensime*
